@@ -58,7 +58,7 @@
     <div class="social-links text-center">
       <a href="https://api.whatsapp.com/send/?phone=918888192019&text=Hello%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you!&type=phone_number&app_absent=0" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
        
-      <a href="https://www.instagram.com/amol.mane9?igsh=MTl5ZWtuZ29vdTVrMg%3D%3D&utm_source=qr" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a>
+      <!-- <a href="https://www.instagram.com/amol.mane9?igsh=MTl5ZWtuZ29vdTVrMg%3D%3D&utm_source=qr" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a> -->
       
       <a href="https://linkedin.com/in/amol-mane91" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
       <a href="https://github.com/Amol-Mane-AM" target="_blank"><i class="bi bi-github"></i></a> 
@@ -413,7 +413,7 @@
       <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
         <div class="icon-box">
           <div class="icon"><i class="bi bi-code-slash"></i></div>
-          <h4><a href="#">Web Development</a></h4>
+          <h4>Web Development</h4>
           <p>Responsive and modern websites using HTML, CSS, Bootstrap, and JavaScript.</p>
         </div>
       </div>
@@ -422,7 +422,7 @@
       <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
         <div class="icon-box">
           <div class="icon"><i class="bi bi-cpu"></i></div>
-          <h4><a href="#">Java Development</a></h4>
+          <h4>Java Development</h4>
           <p>Console-based and GUI-based Java applications using core Java and collections.</p>
         </div>
       </div>
@@ -431,7 +431,7 @@
       <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
         <div class="icon-box">
           <div class="icon"><i class="bi bi-laptop"></i></div>
-          <h4><a href="#">React Projects</a></h4>
+          <h4>React Projects</h4>
           <p>Single Page Applications using React.js with dynamic components and state management.</p>
         </div>
       </div>
@@ -487,41 +487,78 @@
         </div>
       </div>
 
-      <div class="col-lg-7">
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-          <div class="row gy-4">
 
-            <div class="col-md-6">
-              <label for="name-field" class="pb-2">Your Name</label>
-              <input type="text" name="name" id="name-field" class="form-control" required>
-            </div>
+      <div class="col-lg-7 mx-auto p-4 shadow rounded bg-light">
+  <form method="POST" id="form" class="needs-validation" novalidate>
+    <input type="hidden" name="access_key" value="86ea5e2e-27f6-47fb-9c8f-3305cf12cf15">
+    <input type="checkbox" name="botcheck" class="d-none">
 
-            <div class="col-md-6">
-              <label for="email-field" class="pb-2">Your Email</label>
-              <input type="email" class="form-control" name="email" id="email-field" required>
-            </div>
+    <h3 class="mb-4 text-center text-dark">Contact Us</h3>
 
-            <div class="col-md-12">
-              <label for="subject-field" class="pb-2">Subject</label>
-              <input type="text" class="form-control" name="subject" id="subject-field" required>
-            </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Your Name</label>
+      <input type="text" name="name" class="form-control" id="name" required>
+    </div>
 
-            <div class="col-md-12">
-              <label for="message-field" class="pb-2">Message</label>
-              <textarea class="form-control" name="message" rows="10" id="message-field" required></textarea>
-            </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Your Email</label>
+      <input type="email" name="email" class="form-control" id="email" required>
+    </div>
 
-            <div class="col-md-12 text-center">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+    <div class="mb-3">
+      <label for="message" class="form-label">Your Message</label>
+      <textarea name="message" rows="5" class="form-control" id="message" required></textarea>
+    </div>
 
-              <button type="submit">Send Message</button>
-            </div>
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </div>
 
-          </div>
-        </form>
-      </div><!-- End Contact Form -->
+    <div id="result" class="mt-3 text-center text-success fw-bold"></div>
+  </form>
+</div>
+
+
+     <script>
+const form = document.getElementById('form');
+const result = document.getElementById('result');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Please wait...";
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: json
+  })
+  .then(async (response) => {
+    let json = await response.json();
+    if (response.status === 200) {
+      result.innerHTML = "✅ Form submitted successfully!";
+    } else {
+      result.innerHTML = "❌ " + json.message;
+    }
+  })
+  .catch(error => {
+    result.innerHTML = "❌ Something went wrong!";
+  })
+  .then(function() {
+    form.reset();
+    setTimeout(() => {
+      result.innerHTML = "";
+    }, 3000);
+  });
+});
+</script>
+
+
 
     </div>
 
