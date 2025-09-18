@@ -54,7 +54,25 @@ function Home2() {
           </Col>
           <Col md={4} className="myAvtar">
             <Tilt>
-              <img src={myImg} className="img-fluid" alt="avatar"   style={{ height: "300px", width: "950px" }}  />
+              <img src={myImg} className="img-fluid" alt="avatar"   
+              style={{ 
+     maxHeight: "300px", 
+    width: "auto", 
+    borderRadius: "20px", 
+    objectFit: "contain", 
+    boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.3)", 
+    border: "3px solid #fff",
+    transition: "transform 0.3s ease, box-shadow 0.3s ease" // smooth hover
+  }} 
+  onMouseOver={(e) => {
+    e.currentTarget.style.transform = "scale(1.05)";
+    e.currentTarget.style.boxShadow = "0px 12px 30px rgba(0, 0, 0, 0.5)";
+  }}
+  onMouseOut={(e) => {
+    e.currentTarget.style.transform = "scale(1)";
+    e.currentTarget.style.boxShadow = "0px 8px 20px rgba(0, 0, 0, 0.3)";
+  }}
+   />
             </Tilt>
           </Col>
         </Row>
